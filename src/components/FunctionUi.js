@@ -4,8 +4,15 @@ export default function FunctionUi(props) {
    const renderInputs = (num) => {
       const inputs = [];
       for (let i = 0; i < num; i += 1) {
+         const id = `input-${props.name}-${i}`;
+
          inputs.push(
-            <input type="text" className="form-control inline-action" />
+            <input
+               type="text"
+               className="form-control inline-action"
+               key={id}
+               id={id}
+            />
          );
       }
       return inputs;
@@ -14,14 +21,14 @@ export default function FunctionUi(props) {
    return (
       <div className="col-12 col-lg-8 offset-lg-2 mb-5">
          <p className="name">
-            <b>{props.theUi.name}</b>
-            {props.theUi.desc}
+            <b>{props.name}</b>
+            {props.desc}
          </p>
          <pre style={{ display: "none" }}>
             <code></code>
          </pre>
          <div className="actions float-right">
-            {renderInputs(props.theUi.inputs)}
+            {renderInputs(props.inputs)}
             <button className="btn btn-primary inline-action">Run</button>
          </div>
          <div className="clearfix mb-3"></div>
