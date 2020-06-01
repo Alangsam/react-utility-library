@@ -5,7 +5,7 @@ export const uiData = [
       inputs: 2,
       type: "basic",
       typeNum: 100,
-      isFavorite: false,
+      isFavorite: true,
       order: 100,
    },
    {
@@ -14,7 +14,7 @@ export const uiData = [
       inputs: 2,
       type: "basic",
       typeNum: 100,
-      isFavorite: false,
+      isFavorite: true,
       order: 101,
    },
    {

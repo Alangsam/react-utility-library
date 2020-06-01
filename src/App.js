@@ -13,23 +13,80 @@ export default class App extends React.Component {
          isFavoritesChecked: false,
          allFunctions: uiData,
          displayedFunctions: uiData,
+         searchBox: 1,
+         value: "default",
       };
    }
-
+   //need to change the state of displayedfunxtions,
+   //so its an actual list where the name is one with the span
    toggleFavorites(e) {
-      this.setState({ isFavoritesChecked: !this.state.isFavoritesChecked });
-      const userInput = e.target.id;
-      console.log(userInput);
+      const isFavoritesChecked = document.getElementById("viewmode-favorites")
+         .checked;
+      //console.log(isFavoritesChecked);
+      const searchFunctionsInput = document.getElementById("search-input")
+         .value;
       const allFunctions = [...this.state.allFunctions];
-      if (userInput == "viewmode-favorites") {
+      if (isFavoritesChecked) {
+         this.setState({ isFavoritesChecked: true });
          const filteredByFavorites = allFunctions.filter((func) => {
-            return func.isFavoritem === true;
+            return func.isFavorite === true;
          });
          console.log(filteredByFavorites);
-         this.setState({ displayedFunctions: filteredByFavorites });
+         const filterWhatTheySearch = filteredByFavorites.filter((func) => {
+            return (
+               func.name
+                  .toLowerCase()
+                  .indexOf(searchFunctionsInput.toLowerCase()) >= 0
+            );
+         });
+         this.setState({ displayedFunctions: filterWhatTheySearch });
       } else {
-         this.setState({ displayedFunctions: allFunctions });
+         this.setState({ isFavoritesChecked: false });
+         const filterWhatTheySearch = allFunctions.filter((func) => {
+            return (
+               func.name
+                  .toLowerCase()
+                  .indexOf(searchFunctionsInput.toLowerCase()) >= 0
+            );
+         });
+         this.setState({ displayedFunctions: filterWhatTheySearch });
       }
+   }
+   enterWhatSearched(e) {
+      this.setState({
+         searchBox: document.getElementById("search-input").value,
+      });
+   }
+
+   changeTheOrderingOfFunctions(e) {
+      const displayedFunctions = [...this.state.displayedFunctions];
+      const orderByA = orderBy(displayedFunctions, "name", "asc");
+      const orderByZ = orderBy(displayedFunctions, "name", "desc");
+      const orderByRecent = orderBy(displayedFunctions, "order", "desc");
+      const orderByOld = orderBy(displayedFunctions, "order", "asc");
+      this.setState({ value: e.target.value });
+      if (e.target.value === "alphaFirst") {
+         this.setState({
+            displayedFunctions: orderByA,
+         });
+      } else if (e.target.value === "zetaFirst") {
+         this.setState({
+            displayedFunctions: orderByZ,
+         });
+      } else if (e.target.value === "mostRecent") {
+         this.setState({
+            displayedFunctions: orderByRecent,
+         });
+      } else if (e.target.value === "oldestFirst") {
+         this.setState({
+            displayedFunctions: orderByOld,
+         });
+      } else if (e.target.value === "default") {
+         this.setState({
+            displayedFunctions: orderByOld,
+         });
+      }
+      console.log(this.state.displayedFunctions);
    }
 
    //render happens after the page is rendered
@@ -89,22 +146,37 @@ export default class App extends React.Component {
                            aria-label="Search-all-functions"
                            aria-describedby="search-input"
                            id="search-input"
+                           onChange={(e) => {
+                              this.toggleFavorites(e);
+                              this.enterWhatSearched(e);
+                           }}
                         />
                      </div>
                      <div className="col-6">
                         <form>
-                           <select className="form-control">
-                              <option>Most recent</option>
-                              <option>Oldest</option>
-                              <option>A - Z</option>
-                              <option>Z - A</option>
+                           <select
+                              className="form-control"
+                              value={this.state.value}
+                              onChange={(e) => {
+                                 this.changeTheOrderingOfFunctions(e);
+                              }}
+                           >
+                              <option value="default">Order By</option>
+                              <option value="mostRecent">Most recent</option>
+                              <option value="oldestFirst">Oldest</option>
+                              <option value="alphaFirst">A - Z</option>
+                              <option value="zetaFirst">Z - A</option>
                            </select>
                         </form>
                      </div>
                   </div>
                </div>
                {this.state.displayedFunctions.map((functionUI) => {
-                  const { name, desc, inputs } = functionUI;
+                  const name = functionUI.name;
+                  const desc = functionUI.desc;
+                  const inputs = functionUI.inputs;
+                  const searched = this.state.searchBox;
+                  //const { name, desc, inputs } = functionUI;
 
                   return (
                      <FunctionUI
@@ -112,6 +184,7 @@ export default class App extends React.Component {
                         name={name}
                         desc={desc}
                         inputs={inputs}
+                        searched={searched}
                      />
                   );
                })}
