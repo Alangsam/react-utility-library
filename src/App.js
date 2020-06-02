@@ -8,7 +8,6 @@ export default class App extends React.Component {
    //constructor happens before page is constructed
    constructor() {
       super();
-      console.log(uiData);
       this.state = {
          isFavoritesChecked: false,
          allFunctions: uiData,
@@ -86,7 +85,6 @@ export default class App extends React.Component {
             displayedFunctions: orderByOld,
          });
       }
-      console.log(this.state.displayedFunctions);
    }
 
    //render happens after the page is rendered
