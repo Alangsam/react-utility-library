@@ -107,7 +107,7 @@ export default class FunctionUi extends React.Component {
                   newArr.push(makeObjects[things].string);
                }
             }
-            //console.log(wheresTheMatch);
+            console.log(newArr);
             return newArr;
          } else {
             return props.name;
