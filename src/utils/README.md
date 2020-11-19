@@ -2,7 +2,7 @@
 
 utils is a javascript library meant primarily for react, but has a large number of multi-purpose utility functions
 
-##Installation
+## Installation
 
 Using npm to install.
 
