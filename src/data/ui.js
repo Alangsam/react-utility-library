@@ -665,4 +665,13 @@ export const uiData = [
       isFavorite: false,
       order: 515,
    },
+   {
+      name: "highlightSearchedText",
+      desc: "- enter (searchTerm, miscTerm, styleObject, key)",
+      inputs: 4,
+      type: "react",
+      typeNum: 100,
+      isFavorite: true,
+      order: 99,
+   },
 ];

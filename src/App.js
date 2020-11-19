@@ -96,6 +96,7 @@ export default class App extends React.Component {
                   <h1 className="d-flex justify-content-center">
                      JavaScript Utility Library
                   </h1>
+
                   <p className="text-center lead mb-4">
                      {uiData.length}&nbsp;functions documented
                   </p>
