@@ -17,6 +17,10 @@
       "react-dom": "^16.13.1",
       "react-scripts": "3.4.1"
    },
+   "files": [
+      "src/utils/utils.js",
+      "README.md"
+   ],
    "scripts": {
       "start": "react-scripts start",
       "build": "react-scripts build; echo grotesque-bird.surge.sh > build/CNAME",
@@ -38,7 +42,7 @@
          "last 1 safari version"
       ]
    },
-   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+   "description": "This project is a compilation of functions I've found useful within the React environment.",
    "main": "src/utils/utils.js",
    "devDependencies": {},
    "repository": {
@@ -48,7 +52,10 @@
    "keywords": [
       "react",
       "highlight",
-      "text"
+      "text",
+      "utility",
+      "functions",
+      "jsx"
    ],
    "author": "alangsam",
    "license": "ISC",
