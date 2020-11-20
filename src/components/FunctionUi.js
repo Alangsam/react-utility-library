@@ -1,5 +1,5 @@
 import React from "react";
-import utils from "../utils/utils";
+import utils from "../utils/utils.tsx";
 import helpers from "../utils/helpers";
 
 export default class FunctionUi extends React.Component {
