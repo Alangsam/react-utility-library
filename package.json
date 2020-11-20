@@ -71,7 +71,7 @@
    },
    "main": "src/utils/utils.js",
    "files": [
-      "src/utils/utils.js",
+      "src/utils/utils.tsx",
       "README.md"
    ],
    "scripts": {
